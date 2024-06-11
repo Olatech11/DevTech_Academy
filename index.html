@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <div class="question" id="question1">
+        <p>1. What is the capital of France?</p>
+        <input type="radio" name="q1" value="paris"> Paris
+        <input type="radio" name="q1" value="london"> London
+        <input type="radio" name="q1" value="berlin"> Berlin
+    </div>
+
+    <div class="question" id="question2">
+        <p>2. Which planet is known as the Red Planet?</p>
+        <input type="radio" name="q2" value="earth"> Earth
+        <input type="radio" name="q2" value="mars"> Mars
+        <input type="radio" name="q2" value="venus"> Venus
+    </div>
+
+    <!-- Add more questions as needed -->
+
+    <button onclick="submitQuiz()">Submit</button>
+</div>
+
+<script>
+    function submitQuiz() {
+        // Calculate and display the score
+        var score = 0;
+        var questions = document.getElementsByClassName('question');
+
+        for (var i = 0; i < questions.length; i++) {
+            var selectedAnswer = getSelectedAnswer(questions[i]);
+            var correctAnswer = getCorrectAnswer(questions[i]);
+
+            if (selectedAnswer === correctAnswer) {
+                score++;
+            }
+        }
+
+        alert('Your score: ' + score + '/' + questions.length);
+    }
+
+    function getSelectedAnswer(question) {
+        var selectedOption = question.querySelector('input[name="' + question.id + '"]:checked');
+        return selectedOption ? selectedOption.value : null;
+    }
+
+    function getCorrectAnswer(question) {
+        // In a real scenario, correct answers would be stored in a database or server
+        var correctAnswers = {
+            'question1': 'paris',
+            'question2': 'mars'
+            // Add more correct answers as needed
+        };
+
+        return correctAnswers[question.id];
+    }
+</script>
+
+</body>
+</html>
